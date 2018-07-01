@@ -19,7 +19,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var actorNames = [String]()
     var actorPopularity = [Float]()
-    var actorImages = [String]()
+    var actorImages = [Any]()
     var actorID = [Any]()
     var selectedActor_Name = ""
     var selectedActor_Popularity = ""
@@ -58,24 +58,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     
                     do {
                         let jSONResult = try JSONSerialization.jsonObject(with: data!, options: JSONSerialization.ReadingOptions.mutableContainers) as! Dictionary<String,AnyObject>
-                        
                         //print(jSONResult)
-                        
-                        let totalPage = jSONResult["total_pages"] as! Int
+                        //let totalPage = jSONResult["total_pages"] as! Int
                         //print(totalPage)
                         let popularList = jSONResult["results"] as! NSArray
                         //print(popularList)
-                        
+        
                         for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
-                            //print(actorObj["name"]!, actorObj["popularity"]!)
-                            //self.actorNames.append(actorObj["name"] as! String)
                             self.actorNames.append(actorObj["name"]! as! String)
                             self.actorPopularity.append(actorObj["popularity"]! as! Float)
-                            //self.actorImages.append(actorObj["profile_path"]! as! String)
-                            self.actorID.append(actorObj["id"]! as! Int)
+                            self.actorImages.append(actorObj["profile_path"])
+                            //self.actorID.append(actorObj["id"]! as! Int)
                         }
-                        //self.actorNames.append(actorNames)
-                        //print(self.actorNames)
                         let filteredStrings = self.actorNames.filter({ (item: String) -> Bool in
                             let stringMatch = item.localizedLowercase.range(of: self.searchName.localizedLowercase)
                             return stringMatch != nil ? true : false
@@ -98,21 +92,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewWillAppear(animated)
         apiRequest(page: page)
     }
-    
-//    @IBAction func nextPage(_ sender: Any) {
-//        self.page+=1
-//        currentPage.text = String(self.page)
-//        apiRequest(page: page)
-//    }
-//
-//    @IBAction func previousPage(_ sender: Any) {
-//        if self.page>1 {
-//            self.page-=1
-//            currentPage.text = String(self.page)
-//            apiRequest(page: page)
-//        }
-//    }
-    
+
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 //        let search = String(describing: searchBar.text)
 //        self.actorNames.removeAll()
@@ -137,14 +117,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let destinationVC = segue.destination as! ActorViewController
             destinationVC.actorName = selectedActor_Name
             destinationVC.actorPopularity = selectedActor_Popularity
-            //destinationVC.actorImageUrl = selectedActor_Image
+            destinationVC.actorImageUrl = selectedActor_Image
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedActor_Name = actorNames[indexPath.row]
         selectedActor_Popularity = String(actorPopularity[indexPath.row])
-        //selectedActor_Image = actorImages[indexPath.row]
+        selectedActor_Image = actorImages[indexPath.row] as! String
         performSegue(withIdentifier: "toActorPage", sender: nil)
     }
     
@@ -170,7 +150,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func beginBatchFetch() {
         fetchingMore = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
             let newActors = (self.actorNames.count...self.actorNames.count + 19).map { index in index }
             //self.actorID.append(contentsOf: newActors as [Any])
             self.page += 1
