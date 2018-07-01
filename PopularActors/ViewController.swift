@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        apiRequest(page: page)
 //        currentPage.text = "1"
         loadingActivity.isHidden = true
         tableView.dataSource = self
@@ -67,7 +68,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
                             self.actorNames.append(actorObj["name"]! as! String)
                             self.actorPopularity.append(actorObj["popularity"]! as! Float)
-                            self.actorImages.append(actorObj["profile_path"])
+                            self.actorImages.append(actorObj["profile_path"] as Any)
                             //self.actorID.append(actorObj["id"]! as! Int)
                         }
                         let filteredStrings = self.actorNames.filter({ (item: String) -> Bool in
@@ -90,7 +91,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        apiRequest(page: page)
     }
 
 //    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
