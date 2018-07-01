@@ -9,11 +9,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Helvetica.ttc">
-            <string>Helvetica</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -24,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="32" sectionFooterHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="zOh-Ve-crY">
-                                <rect key="frame" x="16" y="96" width="343" height="478"/>
+                                <rect key="frame" x="16" y="96" width="343" height="546"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="qeS-xL-c7N">
                                     <rect key="frame" x="0.0" y="0.0" width="343" height="44"/>
@@ -32,61 +27,34 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </searchBar>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t0z-im-gKI">
-                                <rect key="frame" x="40" y="597" width="59" height="30"/>
-                                <state key="normal" title="Previous"/>
-                                <connections>
-                                    <action selector="previousPage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="knc-Hb-4yD"/>
-                                </connections>
-                            </button>
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="spatial" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="3qu-5k-bBP">
                                 <rect key="frame" x="177" y="323.5" width="20" height="20"/>
                             </activityIndicatorView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Page" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nl-3d-OHr">
-                                <rect key="frame" x="173" y="605" width="28.5" height="14"/>
-                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.90000000000000002" tag="1" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Popular Actors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Trl-Xk-mQQ">
                                 <rect key="frame" x="105" y="64" width="165" height="24"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgn-jZ-KeI">
-                                <rect key="frame" x="303" y="597" width="32" height="30"/>
-                                <state key="normal" title="Next"/>
-                                <connections>
-                                    <action selector="nextPage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="M61-Zn-evk"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zOh-Ve-crY" secondAttribute="trailing" constant="16" id="Bhu-1j-JNf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Trl-Xk-mQQ" secondAttribute="trailing" constant="105" id="Bhv-DN-WXk"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kgn-jZ-KeI" secondAttribute="trailing" constant="40" id="IoJ-z7-EXl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zOh-Ve-crY" secondAttribute="bottom" constant="25" id="Bi3-vv-Hdi"/>
                             <constraint firstItem="zOh-Ve-crY" firstAttribute="top" secondItem="Trl-Xk-mQQ" secondAttribute="bottom" constant="8" id="OM3-ox-OZ7"/>
                             <constraint firstItem="Trl-Xk-mQQ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="OUy-yY-2o9"/>
                             <constraint firstItem="zOh-Ve-crY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R14-Ry-9iY"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="kgn-jZ-KeI" secondAttribute="bottom" constant="40" id="SeA-7r-BcK"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="5nl-3d-OHr" secondAttribute="bottom" constant="48" id="WMA-sq-3ne"/>
                             <constraint firstItem="Trl-Xk-mQQ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="105" id="YI7-4c-FPr"/>
                             <constraint firstItem="Trl-Xk-mQQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="hdE-4Z-ce9"/>
-                            <constraint firstItem="t0z-im-gKI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="lkB-Jd-UKl"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="t0z-im-gKI" secondAttribute="bottom" constant="40" id="mCb-lX-nly"/>
                             <constraint firstItem="zOh-Ve-crY" firstAttribute="top" secondItem="Trl-Xk-mQQ" secondAttribute="bottom" constant="8" id="pz3-fg-aH2"/>
                             <constraint firstItem="3qu-5k-bBP" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qAD-je-fjJ"/>
-                            <constraint firstItem="t0z-im-gKI" firstAttribute="top" secondItem="zOh-Ve-crY" secondAttribute="bottom" constant="23" id="tIT-Dn-foW"/>
-                            <constraint firstItem="5nl-3d-OHr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="tuR-2T-LHD"/>
                             <constraint firstItem="3qu-5k-bBP" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="x1E-qk-jS6"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="KSt-cg-OKf"/>
                     <connections>
-                        <outlet property="currentPage" destination="5nl-3d-OHr" id="EMi-DM-qaj"/>
                         <outlet property="loadingActivity" destination="3qu-5k-bBP" id="rCp-cA-QCW"/>
                         <outlet property="tableView" destination="zOh-Ve-crY" id="lcm-1d-4Gb"/>
                         <segue destination="DCg-ie-5vX" kind="show" identifier="toActorPage" id="Skv-XB-1Kb"/>

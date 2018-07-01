@@ -7,29 +7,32 @@
 //
 
 import UIKit
-//import AlamofireImage
+import AlamofireImage
+import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchActor: UISearchBar!
-    @IBOutlet weak var currentPage: UILabel!
+//    @IBOutlet weak var currentPage: UILabel!
     @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
     
     var actorNames = [String]()
     var actorPopularity = [Float]()
-    var actorID = [Int]()
+    var actorImages = [String]()
+    var actorID = [Any]()
     var selectedActor_Name = ""
     var selectedActor_Popularity = ""
-    var selectedActor_Image = UIImage()
+    var selectedActor_Image = ""
     var page: Int = 1
     var searchName = "Chris"
     var searchResult = [String]()
+    var fetchingMore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        currentPage.text = "1"
+//        currentPage.text = "1"
         loadingActivity.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
@@ -59,13 +62,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         print(totalPage)
                         let popularList = jSONResult["results"] as! NSArray
                         //print(popularList)
-
-                        self.actorNames.removeAll()
+                        
                         for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
                             //print(actorObj["name"]!, actorObj["popularity"]!)
                             //self.actorNames.append(actorObj["name"] as! String)
                             self.actorNames.append(actorObj["name"]! as! String)
                             self.actorPopularity.append(actorObj["popularity"]! as! Float)
+                            //self.actorImages.append(actorObj["profile_path"]! as! String)
                             self.actorID.append(actorObj["id"]! as! Int)
                         }
                         //self.actorNames.append(actorNames)
@@ -95,22 +98,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         apiRequest(page: page)
     }
     
-    @IBAction func nextPage(_ sender: Any) {
-        self.page+=1
-        currentPage.text = String(self.page)
-        apiRequest(page: page)
-    }
-    
-    @IBAction func previousPage(_ sender: Any) {
-        if self.page>1 {
-            self.page-=1
-            currentPage.text = String(self.page)
-            apiRequest(page: page)
-        }
-    }
+//    @IBAction func nextPage(_ sender: Any) {
+//        self.page+=1
+//        currentPage.text = String(self.page)
+//        apiRequest(page: page)
+//    }
+//
+//    @IBAction func previousPage(_ sender: Any) {
+//        if self.page>1 {
+//            self.page-=1
+//            currentPage.text = String(self.page)
+//            apiRequest(page: page)
+//        }
+//    }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        var search = String(describing: searchBar.text)
+        let search = String(describing: searchBar.text)
         self.actorNames.removeAll()
         self.actorNames.append(String(search))
         self.tableView.reloadData()
@@ -125,7 +128,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            loadingActivity.isHidden=false
 //            loadingActivity.startAnimating()
 //        }
-        return self.actorNames.count
+        return self.actorID.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -133,20 +136,48 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             let destinationVC = segue.destination as! ActorViewController
             destinationVC.actorName = selectedActor_Name
             destinationVC.actorPopularity = selectedActor_Popularity
+            //destinationVC.actorImageUrl = selectedActor_Image
         }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedActor_Name = actorNames[indexPath.row]
         selectedActor_Popularity = String(actorPopularity[indexPath.row])
+        //selectedActor_Image = actorImages[indexPath.row]
         performSegue(withIdentifier: "toActorPage", sender: nil)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = self.actorNames[indexPath.row] //+ String(self.actorPopularity[indexPath.row])
+        cell.textLabel?.text = "\(indexPath.row + 1).  \(self.actorNames[indexPath.row])"
+        //cell.textLabel?.text = "\(indexPath.row + 1).  \(String(describing: self.actorID[indexPath.row]))"
         //cell.textLabel?.text = String(self.actorPopularity[indexPath.row])
         return cell
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if offsetY > contentHeight - scrollView.frame.height * 4 {
+            if !fetchingMore {
+                beginBatchFetch()
+            }
+        }
+    }
+    
+    func beginBatchFetch() {
+        fetchingMore = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.25, execute: {
+            let newActors = (self.actorNames.count...self.actorNames.count + 19).map { index in index }
+            //self.actorID.append(contentsOf: newActors as [Any])
+            self.page += 1
+            self.apiRequest(page: self.page)
+            print(newActors)
+            self.fetchingMore = false
+            self.tableView.reloadData()
+        })
     }
     
 }

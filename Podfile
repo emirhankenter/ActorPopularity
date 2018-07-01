@@ -6,6 +6,7 @@ target 'PopularActors' do
   use_frameworks!
 
   # Pods for PopularActors
-  pod 'AlamofireImage', '~> 3.3'
+  pod 'AlamofireImage', '~> 3.3’
+  pod 'Alamofire', '~> 4.7'
 
 end
