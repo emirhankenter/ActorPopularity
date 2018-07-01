@@ -29,6 +29,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var searchResult = [String]()
     var fetchingMore = false
     
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         loadingActivity.isHidden = true
         tableView.dataSource = self
         tableView.delegate = self
+        searchController.searchBar.placeholder = "Search Actors"
     }
     
     func apiRequest(page: Int){//start requesting data
@@ -59,7 +62,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         //print(jSONResult)
                         
                         let totalPage = jSONResult["total_pages"] as! Int
-                        print(totalPage)
+                        //print(totalPage)
                         let popularList = jSONResult["results"] as! NSArray
                         //print(popularList)
                         
@@ -77,10 +80,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             let stringMatch = item.localizedLowercase.range(of: self.searchName.localizedLowercase)
                             return stringMatch != nil ? true : false
                         })
-                        print("//////////")
                         self.searchResult.append(contentsOf: filteredStrings)
                         print(self.searchResult)
-                        print("//////////")
                         self.tableView.reloadData()
                         
                     } catch {
@@ -112,13 +113,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //        }
 //    }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let search = String(describing: searchBar.text)
-        self.actorNames.removeAll()
-        self.actorNames.append(String(search))
-        self.tableView.reloadData()
-        
-    }
+//    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+//        let search = String(describing: searchBar.text)
+//        self.actorNames.removeAll()
+//        self.actorNames.append(String(search))
+//        self.tableView.reloadData()
+//    }
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 //        if loadingActivity.isAnimating == true {
@@ -128,7 +129,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            loadingActivity.isHidden=false
 //            loadingActivity.startAnimating()
 //        }
-        return self.actorID.count
+        return self.actorNames.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
