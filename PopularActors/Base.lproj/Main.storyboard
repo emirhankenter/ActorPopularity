@@ -29,6 +29,9 @@
                             <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search Actors" showsCancelButton="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qeS-xL-c7N">
                                 <rect key="frame" x="0.0" y="64" width="375" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="RLW-1G-tag"/>
+                                </connections>
                             </searchBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -48,6 +51,7 @@
                     <navigationItem key="navigationItem" title="Popular Actors" id="KSt-cg-OKf"/>
                     <connections>
                         <outlet property="loadingActivity" destination="3qu-5k-bBP" id="rCp-cA-QCW"/>
+                        <outlet property="searchActor" destination="qeS-xL-c7N" id="Ii7-nX-Lyj"/>
                         <outlet property="tableView" destination="zOh-Ve-crY" id="lcm-1d-4Gb"/>
                         <segue destination="DCg-ie-5vX" kind="show" identifier="toActorPage" id="Skv-XB-1Kb"/>
                     </connections>
