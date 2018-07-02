@@ -33,12 +33,20 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="RLW-1G-tag"/>
                                 </connections>
                             </searchBar>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Results" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BaH-Vh-dmm">
+                                <rect key="frame" x="165" y="642" width="44.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="BaH-Vh-dmm" firstAttribute="top" secondItem="zOh-Ve-crY" secondAttribute="bottom" id="0mW-fM-otd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="zOh-Ve-crY" secondAttribute="trailing" constant="16" id="Bhu-1j-JNf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="zOh-Ve-crY" secondAttribute="bottom" constant="25" id="Bi3-vv-Hdi"/>
                             <constraint firstItem="zOh-Ve-crY" firstAttribute="top" secondItem="qeS-xL-c7N" secondAttribute="bottom" id="JHe-8d-BRj"/>
+                            <constraint firstItem="BaH-Vh-dmm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="KcB-YR-sTV"/>
                             <constraint firstItem="qeS-xL-c7N" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Q8W-GS-saw"/>
                             <constraint firstItem="zOh-Ve-crY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="R14-Ry-9iY"/>
                             <constraint firstItem="qeS-xL-c7N" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="VBK-zL-Cpd"/>
@@ -52,6 +60,7 @@
                     <connections>
                         <outlet property="loadingActivity" destination="3qu-5k-bBP" id="rCp-cA-QCW"/>
                         <outlet property="searchActor" destination="qeS-xL-c7N" id="Ii7-nX-Lyj"/>
+                        <outlet property="searchResults" destination="BaH-Vh-dmm" id="xSl-tv-8wl"/>
                         <outlet property="tableView" destination="zOh-Ve-crY" id="lcm-1d-4Gb"/>
                         <segue destination="DCg-ie-5vX" kind="show" identifier="toActorPage" id="Skv-XB-1Kb"/>
                     </connections>

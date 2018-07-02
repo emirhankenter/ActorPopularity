@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchActor: UISearchBar!
     @IBOutlet weak var loadingActivity: UIActivityIndicatorView!
+    @IBOutlet weak var searchResults: UILabel!
     
     var actorNames = [String]()
     var actorPopularity = [Float]()
@@ -26,6 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var page: Int = 1
     var fetchingMore = false
     var searchURL = String()
+    var totalResult = Int()
     
     let searchController = UISearchController(searchResultsController: nil)
     
@@ -65,16 +67,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         //print(jSONResult)
                         //let totalPage = jSONResult["total_pages"] as! Int
                         //print(totalPage)
-                        let popularList = jSONResult["results"] as! NSArray
-                        //print(popularList)
-        
-                        for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
-                            self.actorNames.append(actorObj["name"]! as! String)
-                            self.actorPopularity.append(actorObj["popularity"]! as! Float)
-                            self.actorImages.append(actorObj["profile_path"]! as Any)
-                            //self.actorID.append(actorObj["id"]! as! Int)
+                        
+                        if jSONResult["results"] != nil {
+                            self.totalResult = jSONResult["total_results"] as! Int
+                            let popularList = jSONResult["results"] as! NSArray
+                            //print(popularList)
+                            print(self.totalResult)
+
+                            for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
+                                self.actorNames.append(actorObj["name"]! as! String)
+                                self.actorPopularity.append(actorObj["popularity"]! as! Float)
+                                self.actorImages.append(actorObj["profile_path"]! as Any)
+                                //self.actorID.append(actorObj["id"]! as! Int)
+                            }
+                            self.reloadData()
+                        } else {
+                            self.totalResult = 0
                         }
-                        self.reloadData()
                         
                     } catch {
                         
@@ -90,6 +99,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func reloadData(){
         self.tableView.reloadData()
+        if self.actorNames.count == 0 {
+            self.searchResults?.text = "No results found"
+            self.searchResults.isHidden = false
+            print(self.totalResult)
+        }
     }
     
     func removeArrays(){
@@ -103,6 +117,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.removeArrays()
         self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
+        self.searchActor.text = ""
+        self.view.endEditing(true)
         self.apiRequest()
         self.reloadData()
 
@@ -153,6 +169,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = "\(indexPath.row + 1).  \(self.actorNames[indexPath.row])"
+        self.searchResults?.text = "\(self.totalResult) results found"
+        self.searchResults.isHidden = false
         //cell.textLabel?.text = "\(indexPath.row + 1).  \(String(describing: self.actorID[indexPath.row]))"
         //cell.textLabel?.text = String(self.actorPopularity[indexPath.row])
         return cell
