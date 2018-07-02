@@ -6,3 +6,4 @@
 4- Search yaparken yazdığımız text arama butonuna bastıktan sonra query oluşturuyor ve buna göre url oluşturuluyor. Arama sonuçları tableViewde gösteriliyor. Sonuç yoksa labelda "No results" yazıyor.
 5- Herhangi bir aktörü tablodan seçtiğimizde bizi başka bir viewController'a (ActorViewController) navigate ediyor.
 6- ActorViewController'da aktörün fotoğrafı, ismi ve popülerliği gösteriliyor.
+7- Aktörün resimi jSON dosyasından nil olarak gelir ise, default olarak Brad Pitt'in resimini gösteriyor.
