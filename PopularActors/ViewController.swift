@@ -113,17 +113,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.actorID.removeAll()
         self.actorImages.removeAll()
     }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        self.removeArrays()
-        self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
-        self.searchActor.text = ""
-        self.view.endEditing(true)
-        self.apiRequest()
-        self.reloadData()
 
-    }
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let keywords = searchBar.text
         let finalKeywords = keywords?.replacingOccurrences(of: " ", with: "+")
@@ -131,6 +121,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.searchURL = "https://api.themoviedb.org/3/search/person?api_key=e0fa1c423583d32191513776f4eb5e62&query=\(finalKeywords!)&page=\(self.page)"
         self.view.endEditing(true)
         self.apiRequest()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" {
+            self.removeArrays()
+            self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
+            self.view.endEditing(true)
+            self.apiRequest()
+            self.reloadData()
+        }
     }
     
     func createUrl(){
