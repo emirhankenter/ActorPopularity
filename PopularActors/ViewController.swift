@@ -9,6 +9,7 @@
 import UIKit
 import AlamofireImage
 import Alamofire
+import EZLoadingActivity
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
@@ -42,8 +43,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func apiRequest(){//start requesting data
-        
-//        self.loadingActivity.isHidden=false
+        EZLoadingActivity.show("Loading...", disableUI: false)
+        //        self.loadingActivity.isHidden=false
 //        self.loadingActivity.startAnimating()
 
         //showloading
@@ -52,6 +53,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         let task = session.dataTask(with: url!) { (data, response, error) in
             //hide loading
+            EZLoadingActivity.hide()
 //            self.loadingActivity.isHidden = true
 //            self.loadingActivity.stopAnimating()
             if error != nil {
@@ -72,7 +74,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                             self.totalResult = jSONResult["total_results"] as! Int
                             let popularList = jSONResult["results"] as! NSArray
                             //print(popularList)
-                            print(self.totalResult)
 
                             for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
                                 self.actorNames.append(actorObj["name"]! as! String)
@@ -102,7 +103,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         if self.actorNames.count == 0 {
             self.searchResults?.text = "No results found"
             self.searchResults.isHidden = false
-            print(self.totalResult)
         }
     }
     
@@ -130,7 +130,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         self.removeArrays()
         self.searchURL = "https://api.themoviedb.org/3/search/person?api_key=e0fa1c423583d32191513776f4eb5e62&query=\(finalKeywords!)&page=\(self.page)"
         self.view.endEditing(true)
-        print(self.searchURL)
         self.apiRequest()
     }
     
@@ -157,7 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         selectedActor_Popularity = String(actorPopularity[indexPath.row])
         if let image = actorImages[indexPath.row] as? String {
             selectedActor_Image = image
-            print(actorImages[indexPath.row] as Any)
+            //print(actorImages[indexPath.row] as Any)
         } else {
             selectedActor_Image = "/kU3B75TyRiCgE270EyZnHjfivoq.jpg"
             //Brat Pitt's image is default when actorObj["profile_path"] is nil
@@ -180,7 +179,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if offsetY > contentHeight - scrollView.frame.height * 2 {
+        if offsetY > contentHeight - scrollView.frame.height * 3 {
             if !fetchingMore {
                 beginBatchFetch()
             }

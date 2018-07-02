@@ -8,5 +8,6 @@ target 'PopularActors' do
   # Pods for PopularActors
   pod 'AlamofireImage', '~> 3.3’
   pod 'Alamofire', '~> 4.7'
+  pod 'EZLoadingActivity'
 
 end

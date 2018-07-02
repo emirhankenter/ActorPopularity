@@ -14,8 +14,6 @@
 		B405553A20E665A2000BB6AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B405553920E665A2000BB6AD /* Assets.xcassets */; };
 		B405553D20E665A2000BB6AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B405553B20E665A2000BB6AD /* LaunchScreen.storyboard */; };
 		B405554720E6E6F8000BB6AD /* ActorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B405554620E6E6F8000BB6AD /* ActorViewController.swift */; };
-		B42210F520E82DEA009087DB /* AlamofireImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42210F620E82DEA009087DB /* AlamofireImage.framework */; };
-		B42210F720E82DEF009087DB /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B42210F820E82DEF009087DB /* Alamofire.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,8 +28,6 @@
 		B405553C20E665A2000BB6AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B405553E20E665A2000BB6AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B405554620E6E6F8000BB6AD /* ActorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorViewController.swift; sourceTree = "<group>"; };
-		B42210F620E82DEA009087DB /* AlamofireImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B42210F820E82DEF009087DB /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B442FE6120E7D0990061EC23 /* Pods */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Pods; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,8 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B42210F720E82DEF009087DB /* Alamofire.framework in Frameworks */,
-				B42210F520E82DEA009087DB /* AlamofireImage.framework in Frameworks */,
 				435B759B36E70F43A0776D1D /* Pods_PopularActors.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,8 +78,6 @@
 		B442FE6020E7D0990061EC23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B42210F820E82DEF009087DB /* Alamofire.framework */,
-				B42210F620E82DEA009087DB /* AlamofireImage.framework */,
 				B442FE6120E7D0990061EC23 /* Pods */,
 				104C0CCEDAD0B01D1AECC6AF /* Pods_PopularActors.framework */,
 			);
@@ -180,11 +172,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PopularActors/Pods-PopularActors-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireImage/AlamofireImage.framework",
+				"${BUILT_PRODUCTS_DIR}/EZLoadingActivity/EZLoadingActivity.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/EZLoadingActivity.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

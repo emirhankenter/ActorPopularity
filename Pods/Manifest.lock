@@ -2,20 +2,24 @@ PODS:
   - Alamofire (4.7.2)
   - AlamofireImage (3.3.1):
     - Alamofire (~> 4.5)
+  - EZLoadingActivity (1.01)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - AlamofireImage (~> 3.3)
+  - EZLoadingActivity
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireImage
+    - EZLoadingActivity
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   AlamofireImage: 3b35b586853abaf94ca1250f4e94cff3c21a4c0d
+  EZLoadingActivity: edd7e387e5197b116ce2cccb3fd747ababc2a510
 
-PODFILE CHECKSUM: 73d61eb8b476ff0e8fc7b3947d952bde1d9e068b
+PODFILE CHECKSUM: c13e44c5ecd67afec0c3b7c3076972af92f90f4b
 
 COCOAPODS: 1.5.3
