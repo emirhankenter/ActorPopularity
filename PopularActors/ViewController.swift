@@ -24,8 +24,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var selectedActor_Popularity = ""
     var selectedActor_Image = ""
     var page: Int = 1
-    var urlQuery = ""
-    var urlPopular = ""
     var fetchingMore = false
     var searchURL = String()
     
@@ -33,8 +31,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.urlPopular = "/popular"
-        self.createUrl()
+        self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
         apiRequest()
         loadingActivity.isHidden = true
         tableView.dataSource = self
@@ -105,10 +102,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         self.removeArrays()
-//        self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
-        self.urlPopular = "/popular"
-        self.urlQuery.removeAll()
-        createUrl()
+        self.searchURL = "https://api.themoviedb.org/3/person/popular?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)"
         self.apiRequest()
         self.reloadData()
 
@@ -116,20 +110,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         let keywords = searchBar.text
-        let finalKeywords = keywords?.replacingOccurrences(of: "", with: "+")
+        let finalKeywords = keywords?.replacingOccurrences(of: " ", with: "+")
         self.removeArrays()
-        self.urlQuery = String(finalKeywords!)
-        self.urlQuery = (finalKeywords)!
-        print(self.urlQuery)
-//        self.urlPopular = ""
-////        self.searchURL = "https://api.themoviedb.org/3/search/person?api_key=e0fa1c423583d32191513776f4eb5e62&query=\(finalKeywords!)&page=\(self.page)"
-//        createUrl()
-//        self.view.endEditing(true)
-//        self.apiRequest()
+        self.searchURL = "https://api.themoviedb.org/3/search/person?api_key=e0fa1c423583d32191513776f4eb5e62&query=\(finalKeywords!)&page=\(self.page)"
+        self.view.endEditing(true)
+        print(self.searchURL)
+        self.apiRequest()
     }
     
     func createUrl(){
-        self.searchURL = "https://api.themoviedb.org/3/person\(self.urlPopular)?api_key=e0fa1c423583d32191513776f4eb5e62&page=\(self.page)&query=\(self.urlQuery)"
+        self.searchURL.removeLast()
+        self.searchURL.append(String(self.page))
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
