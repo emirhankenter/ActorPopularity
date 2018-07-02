@@ -18,7 +18,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     var actorNames = [String]()
     var actorPopularity = [Float]()
-    var actorImages = [Any]()
+    var actorImages = [Any!]()
     var actorID = [Any]()
     var selectedActor_Name = ""
     var selectedActor_Popularity = ""
@@ -71,7 +71,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                         for actorObj in (popularList as NSArray as! [Dictionary<String, AnyObject>]) {
                             self.actorNames.append(actorObj["name"]! as! String)
                             self.actorPopularity.append(actorObj["popularity"]! as! Float)
-                            self.actorImages.append(actorObj["profile_path"] as Any)
+                            self.actorImages.append(actorObj["profile_path"]! as Any)
                             //self.actorID.append(actorObj["id"]! as! Int)
                         }
                         self.reloadData()
@@ -139,7 +139,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedActor_Name = actorNames[indexPath.row]
         selectedActor_Popularity = String(actorPopularity[indexPath.row])
-        selectedActor_Image = actorImages[indexPath.row] as! String
+        if let image = actorImages[indexPath.row] as? String {
+            selectedActor_Image = image
+            print(actorImages[indexPath.row] as Any)
+        } else {
+            selectedActor_Image = "/kU3B75TyRiCgE270EyZnHjfivoq.jpg"
+            //Brat Pitt's image is default when actorObj["profile_path"] is nil
+        }
+        
         performSegue(withIdentifier: "toActorPage", sender: nil)
     }
     
